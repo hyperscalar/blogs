@@ -9,27 +9,26 @@ jobs:
   root:
     name: Deploy root
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - name: decrypt
         env:
-          root_rsa: ${{ secrets.root_rsa }}
+          ROOT_ED25519: ${{ secrets.ROOT_ED25519 }}
         run: |
           mkdir ~/.ssh && chmod 700 ~/.ssh
-          echo "$root_rsa" > ~/.ssh/root_rsa
-          chmod 600 ~/.ssh/root_rsa
+          echo "$ROOT_ED25519" > ~/.ssh/root_ed25519
+          chmod 600 ~/.ssh/root_ed25519
           cat > ~/.ssh/config <<EOF
-          Host arhythmetic.github.io
+          Host hyperscalar.github.io
               HostName github.com
               Port 22
               User git
-              IdentityFile ~/.ssh/root_rsa
+              IdentityFile ~/.ssh/root_ed25519
           EOF
           chmod 644 ~/.ssh/config
 
       - name: clone
-        uses: actions/checkout@v2
-        with:
-          lfs: true
+        uses: actions/checkout@v3
 
       - name: config
         run: |
@@ -43,7 +42,7 @@ jobs:
 
       - name: pull
         run: |
-          git remote add root git@arhythmetic.github.io:Arhythmetic/arhythmetic.github.io.git
+          git remote add root git@hyperscalar.github.io:hyperscalar/hyperscalar.github.io.git
           git subtree add --prefix=root/public/ root master --squash
 
       - name: generate
@@ -57,40 +56,41 @@ jobs:
           git add -f root/public/
           git commit --allow-empty -m "Deployed by GitHub Actions"
           git subtree split --prefix=root/public/ --branch root
-          git subtree push --prefix=root/public/ root master --squash
+          git subtree push --prefix=root/public/ root master
 
   zh:
     name: Deploy zh
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - name: decrypt
         env:
-          zh_rsa: ${{ secrets.zh_rsa }}
+          ZH_ED25519: ${{ secrets.ZH_ED25519 }}
         run: |
           mkdir ~/.ssh && chmod 700 ~/.ssh
-          echo "$zh_rsa" > ~/.ssh/zh_rsa
-          chmod 600 ~/.ssh/zh_rsa
+          echo "$ZH_ED25519" > ~/.ssh/zh_ed25519
+          chmod 600 ~/.ssh/zh_ed25519
           cat > ~/.ssh/config <<EOF
-          Host zh.arhythmetic.github.io
+          Host zh.hyperscalar.github.io
               HostName github.com
               Port 22
               User git
-              IdentityFile ~/.ssh/zh_rsa
+              IdentityFile ~/.ssh/zh_ed25519
           EOF
           chmod 644 ~/.ssh/config
 
       - name: clone
-        uses: actions/checkout@v2
-        with:
-          lfs: true
+        uses: actions/checkout@v3
 
       - name: setup
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: '12.x'
+          node-version: 'lts/*'
+          check-latest: true
 
       - name: install
         run: |
+          sudo apt-get install build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
           npm install -g npm@latest
           npm install -g hexo-cli
 
@@ -106,12 +106,13 @@ jobs:
 
       - name: pull
         run: |
-          git remote add zh git@zh.arhythmetic.github.io:Arhythmetic/zh.git
+          git remote add zh git@zh.hyperscalar.github.io:hyperscalar/zh.git
           git subtree add --prefix=zh/public/ zh master --squash
 
       - name: generate
         run: |
           cd zh
+          rm -rf node_modules/ && rm -f package-lock.json
           npm install && npm update
           hexo clean && hexo generate
           cd ..
@@ -122,40 +123,41 @@ jobs:
           git add -f zh/public/
           git commit --allow-empty -m "Deployed by GitHub Actions"
           git subtree split --prefix=zh/public/ --branch zh
-          git subtree push --prefix=zh/public/ zh master --squash
+          git subtree push --prefix=zh/public/ zh master
 
   en:
     name: Deploy en
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - name: decrypt
         env:
-          en_rsa: ${{ secrets.en_rsa }}
+          EN_ED25519: ${{ secrets.EN_ED25519 }}
         run: |
           mkdir ~/.ssh && chmod 700 ~/.ssh
-          echo "$en_rsa" > ~/.ssh/en_rsa
-          chmod 600 ~/.ssh/en_rsa
+          echo "$EN_ED25519" > ~/.ssh/en_ed25519
+          chmod 600 ~/.ssh/en_ed25519
           cat > ~/.ssh/config <<EOF
-          Host en.arhythmetic.github.io
+          Host en.hyperscalar.github.io
               HostName github.com
               Port 22
               User git
-              IdentityFile ~/.ssh/en_rsa
+              IdentityFile ~/.ssh/en_ed25519
           EOF
           chmod 644 ~/.ssh/config
 
       - name: clone
-        uses: actions/checkout@v2
-        with:
-          lfs: true
+        uses: actions/checkout@v3
 
       - name: setup
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: '12.x'
+          node-version: 'lts/*'
+          check-latest: true
 
       - name: install
         run: |
+          sudo apt-get install build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
           npm install -g npm@latest
           npm install -g hexo-cli
 
@@ -171,12 +173,13 @@ jobs:
 
       - name: pull
         run: |
-          git remote add en git@en.arhythmetic.github.io:Arhythmetic/en.git
+          git remote add en git@en.hyperscalar.github.io:hyperscalar/en.git
           git subtree add --prefix=en/public/ en master --squash
 
       - name: generate
         run: |
           cd en
+          rm -rf node_modules/ && rm -f package-lock.json
           npm install && npm update
           hexo clean && hexo generate
           cd ..
@@ -187,4 +190,4 @@ jobs:
           git add -f en/public/
           git commit --allow-empty -m "Deployed by GitHub Actions"
           git subtree split --prefix=en/public/ --branch en
-          git subtree push --prefix=en/public/ en master --squash
+          git subtree push --prefix=en/public/ en master
