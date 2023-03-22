@@ -7,7 +7,7 @@ title: Twice-cooked Blog
 subtitle: Learning & Exploration
 description: Stay hungry, Stay foolish.
 keywords:
-author: Twice-cooked Pork
+author: Twice-cooked
 language: en
 timezone: Asia/Shanghai
 
@@ -199,6 +199,22 @@ symbols_count_time:
   awl: 5
   wpm: 275
   suffix: "mins."
+
+## Related posts: https://github.com/sergeyzwezdin/hexo-related-posts
+related_posts:
+  enabled: true
+  filter_threshold: 0.3
+  related_count: 3
+  weight:
+      title: 0.05
+      description: 0.05
+      keywords: 0.01
+      tags: 0.005
+      categories: 0.005
+      text: 1
+  stemmers:
+    - en
+  reserved:
 
 # Themes: https://hexo.io/themes/
 theme: next
