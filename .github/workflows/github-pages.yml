@@ -36,6 +36,8 @@ jobs:
 
       - name: clone
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - name: status
         run: git status
@@ -89,6 +91,8 @@ jobs:
 
       - name: clone
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - name: status
         run: git status
@@ -113,9 +117,7 @@ jobs:
           cache-dependency-path: 'en/pnpm-lock.yaml'
 
       - name: install
-        run: |
-          npm install -g npm@latest
-          npm install -g pnpm@latest
+        run: npm install -g npm@latest
 
       - name: generate
         run: |
@@ -162,6 +164,8 @@ jobs:
 
       - name: clone
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - name: status
         run: git status
@@ -186,9 +190,7 @@ jobs:
           cache-dependency-path: 'zh/pnpm-lock.yaml'
 
       - name: install
-        run: |
-          npm install -g npm@latest
-          npm install -g pnpm@latest
+        run: npm install -g npm@latest
 
       - name: generate
         run: |
