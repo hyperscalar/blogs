@@ -1,0 +1,11 @@
+packages:
+  - .
+
+onlyBuiltDependencies:
+  - '@firebase/util'
+  - hexo-util
+  - hexo-word-counter
+  - hnswlib-node
+  - onnxruntime-node
+  - protobufjs
+  - sharp

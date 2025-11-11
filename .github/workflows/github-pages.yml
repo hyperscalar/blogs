@@ -35,7 +35,7 @@ jobs:
           git config --global core.quotepath off
 
       - name: clone
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: status
         run: git status
@@ -88,7 +88,7 @@ jobs:
           git config --global core.quotepath off
 
       - name: clone
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: status
         run: git status
@@ -99,22 +99,24 @@ jobs:
           git subtree add --prefix=en/public/ en master --squash
 
       - name: setup
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 'lts/*'
           check-latest: true
-          cache: 'npm'
-          cache-dependency-path: 'en/package-lock.json'
+          cache: 'pnpm'
+          cache-dependency-path: 'en/pnpm-lock.yaml'
 
       - name: install
-        run: npm install -g npm@latest
+        run: |
+          npm install -g npm@latest
+          npm install -g pnpm@latest
 
       - name: generate
         run: |
           cd en
-          npm install
-          npm run clean
-          npm run build
+          pnpm install
+          pnpm run clean
+          pnpm run build
           cd ..
 
       - name: push
@@ -153,7 +155,7 @@ jobs:
           git config --global core.quotepath off
 
       - name: clone
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: status
         run: git status
@@ -164,22 +166,24 @@ jobs:
           git subtree add --prefix=zh/public/ zh master --squash
 
       - name: setup
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 'lts/*'
           check-latest: true
-          cache: 'npm'
-          cache-dependency-path: 'zh/package-lock.json'
+          cache: 'pnpm'
+          cache-dependency-path: 'zh/pnpm-lock.yaml'
 
       - name: install
-        run: npm install -g npm@latest
+        run: |
+          npm install -g npm@latest
+          npm install -g pnpm@latest
 
       - name: generate
         run: |
           cd zh
-          npm install
-          npm run clean
-          npm run build
+          pnpm install
+          pnpm run clean
+          pnpm run build
           cd ..
 
       - name: push

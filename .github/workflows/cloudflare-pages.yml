@@ -35,7 +35,7 @@ jobs:
           git config --global core.quotepath off
 
       - name: clone
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: status
         run: git status
@@ -46,17 +46,19 @@ jobs:
           git subtree add --prefix=root/public/ cloudflare master --squash
 
       - name: setup
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 'lts/*'
           check-latest: true
-          cache: 'npm'
+          cache: 'pnpm'
           cache-dependency-path: |
-            en/package-lock.json
-            zh/package-lock.json
+            en/pnpm-lock.yaml
+            zh/pnpm-lock.yaml
 
       - name: install
-        run: npm install -g npm@latest
+        run: |
+          npm install -g npm@latest
+          npm install -g pnpm@latest
 
       - name: root
         run: |
@@ -80,8 +82,8 @@ jobs:
           sed -i 's|G-YWP460XJG2|G-JQKEN3QFD6|g' _config.next.yml source/404.html
           sed -i 's|plm26dh6lw|plm2juu09c|g' _config.next.yml source/404.html
           sed -i 's|4e14621546db499aa0130cd3f9f308d7|e454ebd4f90d429da0846b70835091da|g' _config.next.yml source/404.html
-          npm install
-          npm run build
+          pnpm install
+          pnpm run build
           mv public ../root/public/en/
           cd ..
 
@@ -94,8 +96,8 @@ jobs:
           sed -i 's|G-YWP460XJG2|G-JQKEN3QFD6|g' _config.next.yml source/404.html
           sed -i 's|plm26dh6lw|plm2juu09c|g' _config.next.yml source/404.html
           sed -i 's|4e14621546db499aa0130cd3f9f308d7|e454ebd4f90d429da0846b70835091da|g' _config.next.yml source/404.html
-          npm install
-          npm run build
+          pnpm install
+          pnpm run build
           mv public ../root/public/zh/
           cd ..
 
