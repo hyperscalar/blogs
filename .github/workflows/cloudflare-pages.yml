@@ -45,7 +45,13 @@ jobs:
           git remote add cloudflare git@hyperscalar.pages.dev:hyperscalar/hyperscalar.pages.dev.git
           git subtree add --prefix=root/public/ cloudflare master --squash
 
-      - name: setup
+      - name: setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 'latest'
+          run_install: false
+
+      - name: setup node
         uses: actions/setup-node@v6
         with:
           node-version: 'lts/*'
