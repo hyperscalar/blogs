@@ -36,8 +36,6 @@ jobs:
 
       - name: clone
         uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
 
       - name: status
         run: git status
@@ -45,7 +43,7 @@ jobs:
       - name: pull
         run: |
           git remote add cloudflare git@hyperscalar.pages.dev:hyperscalar/hyperscalar.pages.dev.git
-          git subtree add --prefix=root/public/ cloudflare master --squash
+          git subtree add --prefix=root/public cloudflare master --squash
 
       - name: setup pnpm
         uses: pnpm/action-setup@v4
@@ -69,8 +67,8 @@ jobs:
       - name: root
         run: |
           cd root
-          rm -rf public/
-          cp -r source public/
+          rm -rf public
+          cp -r source public
           cd public
           sed -i 's|https://hyperscalar.github.io|https://hyperscalar.pages.dev|g' robots.txt README.md
           sed -i 's|G-YWP460XJG2|G-JQKEN3QFD6|g' index.html 404.html
@@ -109,7 +107,7 @@ jobs:
 
       - name: push
         run: |
-          git add -f root/public/
+          git add -f root/public
           git commit --allow-empty -m "Deployed by GitHub Actions"
-          git subtree split --prefix=root/public/ --branch cloudflare
-          git subtree push --prefix=root/public/ cloudflare master
+          git subtree split --prefix=root/public --branch cloudflare
+          git subtree push --prefix=root/public cloudflare master

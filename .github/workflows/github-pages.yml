@@ -36,8 +36,6 @@ jobs:
 
       - name: clone
         uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
 
       - name: status
         run: git status
@@ -45,21 +43,21 @@ jobs:
       - name: pull
         run: |
           git remote add root git@hyperscalar.github.io:hyperscalar/hyperscalar.github.io.git
-          git subtree add --prefix=root/public/ root master --squash
+          git subtree add --prefix=root/public root master --squash
 
       - name: generate
         run: |
           cd root
-          rm -rf public/
-          cp -r source public/
+          rm -rf public
+          cp -r source public
           cd ..
 
       - name: push
         run: |
-          git add -f root/public/
+          git add -f root/public
           git commit --allow-empty -m "Deployed by GitHub Actions"
-          git subtree split --prefix=root/public/ --branch root
-          git subtree push --prefix=root/public/ root master
+          git subtree split --prefix=root/public --branch root
+          git subtree push --prefix=root/public root master
 
   en:
     name: Deploy en
@@ -91,8 +89,6 @@ jobs:
 
       - name: clone
         uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
 
       - name: status
         run: git status
@@ -100,7 +96,7 @@ jobs:
       - name: pull
         run: |
           git remote add en git@en.hyperscalar.github.io:hyperscalar/en.git
-          git subtree add --prefix=en/public/ en master --squash
+          git subtree add --prefix=en/public en master --squash
 
       - name: setup pnpm
         uses: pnpm/action-setup@v4
@@ -129,10 +125,10 @@ jobs:
 
       - name: push
         run: |
-          git add -f en/public/
+          git add -f en/public
           git commit --allow-empty -m "Deployed by GitHub Actions"
-          git subtree split --prefix=en/public/ --branch en
-          git subtree push --prefix=en/public/ en master
+          git subtree split --prefix=en/public --branch en
+          git subtree push --prefix=en/public en master
 
   zh:
     name: Deploy zh
@@ -164,8 +160,6 @@ jobs:
 
       - name: clone
         uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
 
       - name: status
         run: git status
@@ -173,7 +167,7 @@ jobs:
       - name: pull
         run: |
           git remote add zh git@zh.hyperscalar.github.io:hyperscalar/zh.git
-          git subtree add --prefix=zh/public/ zh master --squash
+          git subtree add --prefix=zh/public zh master --squash
 
       - name: setup pnpm
         uses: pnpm/action-setup@v4
@@ -202,7 +196,7 @@ jobs:
 
       - name: push
         run: |
-          git add -f zh/public/
+          git add -f zh/public
           git commit --allow-empty -m "Deployed by GitHub Actions"
-          git subtree split --prefix=zh/public/ --branch zh
-          git subtree push --prefix=zh/public/ zh master
+          git subtree split --prefix=zh/public --branch zh
+          git subtree push --prefix=zh/public zh master
