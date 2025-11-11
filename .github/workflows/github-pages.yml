@@ -6,24 +6,24 @@ on:
       - main
 
 jobs:
-  root:
-    name: Deploy root
+  index:
+    name: Deploy index
     runs-on: ubuntu-latest
     environment: production
     steps:
       - name: decrypt
         env:
-          ROOT_ED25519: ${{ secrets.ROOT_ED25519 }}
+          INDEX_ED25519: ${{ secrets.INDEX_ED25519 }}
         run: |
           mkdir ~/.ssh && chmod 700 ~/.ssh
-          echo "$ROOT_ED25519" > ~/.ssh/root_ed25519
-          chmod 600 ~/.ssh/root_ed25519
+          echo "$INDEX_ED25519" > ~/.ssh/index_ed25519
+          chmod 600 ~/.ssh/index_ed25519
           cat > ~/.ssh/config <<EOF
           Host hyperscalar.github.io
               HostName github.com
               Port 22
               User git
-              IdentityFile ~/.ssh/root_ed25519
+              IdentityFile ~/.ssh/index_ed25519
           EOF
           chmod 644 ~/.ssh/config
 
@@ -42,22 +42,22 @@ jobs:
 
       - name: pull
         run: |
-          git remote add root git@hyperscalar.github.io:hyperscalar/hyperscalar.github.io.git
-          git subtree add --prefix=root/public root master --squash
+          git remote add index git@hyperscalar.github.io:hyperscalar/hyperscalar.github.io.git
+          git subtree add --prefix=index/public index master --squash
 
       - name: generate
         run: |
-          cd root
+          cd index
           rm -rf public
           cp -r source public
           cd ..
 
       - name: push
         run: |
-          git add -f root/public
+          git add -f index/public
           git commit --allow-empty -m "Deployed by GitHub Actions"
-          git subtree split --prefix=root/public --branch root
-          git subtree push --prefix=root/public root master
+          git subtree split --prefix=index/public --branch index
+          git subtree push --prefix=index/public index master
 
   en:
     name: Deploy en

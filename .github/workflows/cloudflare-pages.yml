@@ -43,7 +43,7 @@ jobs:
       - name: pull
         run: |
           git remote add cloudflare git@hyperscalar.pages.dev:hyperscalar/hyperscalar.pages.dev.git
-          git subtree add --prefix=root/public cloudflare master --squash
+          git subtree add --prefix=index/public cloudflare master --squash
 
       - name: setup pnpm
         uses: pnpm/action-setup@v4
@@ -64,9 +64,9 @@ jobs:
       - name: install
         run: npm install -g npm@latest
 
-      - name: root
+      - name: index
         run: |
-          cd root
+          cd index
           rm -rf public
           cp -r source public
           cd public
@@ -88,7 +88,7 @@ jobs:
           sed -i 's|4e14621546db499aa0130cd3f9f308d7|e454ebd4f90d429da0846b70835091da|g' _config.next.yml source/404.html
           pnpm install
           pnpm run build
-          mv public ../root/public/en/
+          mv public ../index/public/en/
           cd ..
 
       - name: zh
@@ -102,12 +102,12 @@ jobs:
           sed -i 's|4e14621546db499aa0130cd3f9f308d7|e454ebd4f90d429da0846b70835091da|g' _config.next.yml source/404.html
           pnpm install
           pnpm run build
-          mv public ../root/public/zh/
+          mv public ../index/public/zh/
           cd ..
 
       - name: push
         run: |
-          git add -f root/public
+          git add -f index/public
           git commit --allow-empty -m "Deployed by GitHub Actions"
-          git subtree split --prefix=root/public --branch cloudflare
-          git subtree push --prefix=root/public cloudflare master
+          git subtree split --prefix=index/public --branch cloudflare
+          git subtree push --prefix=index/public cloudflare master
