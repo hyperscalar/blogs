@@ -1,6 +1,6 @@
 # Blogs
 
-[![GitHub Pages Deployment Status / GitHub Pages 部署状态](https://github.com/Hyperscalar/Blogs/workflows/Continuous%20Deployment%20to%20GitHub%20Pages/badge.svg)](https://github.com/Hyperscalar/Blogs/blob/main/.github/workflows/github-pages.yml) [![Cloudflare Pages Deployment Status / Cloudflare Pages 部署状态](https://github.com/Hyperscalar/Blogs/workflows/Continuous%20Deployment%20to%20Cloudflare%20Pages/badge.svg)](https://github.com/Hyperscalar/Blogs/blob/main/.github/workflows/cloudflare-pages.yml)
+[![GitHub Pages Deployment Status / GitHub Pages 部署状态](https://github.com/hyperscalar/blogs/workflows/Continuous%20Deployment%20to%20GitHub%20Pages/badge.svg)](https://github.com/hyperscalar/blogs/blob/main/.github/workflows/github-pages.yml) [![Cloudflare Pages Deployment Status / Cloudflare Pages 部署状态](https://github.com/hyperscalar/blogs/workflows/Continuous%20Deployment%20to%20Cloudflare%20Pages/badge.svg)](https://github.com/hyperscalar/blogs/blob/main/.github/workflows/cloudflare-pages.yml)
 
 ## The Workspace of Blogs / 博客工作台
 
@@ -21,17 +21,17 @@
 GitHub Pages
 
 - /
-  - -> Deployed on / 部署于 [Hyperscalar/hyperscalar.github.io](https://github.com/Hyperscalar/hyperscalar.github.io)
+  - -> Deployed on / 部署于 [hyperscalar/hyperscalar.github.io](https://github.com/hyperscalar/hyperscalar.github.io)
   - -> Servicing / 服务于 [Home / 首页](https://hyperscalar.github.io/)
 - /en/
-  - -> Deployed on / 部署于 [Hyperscalar/en](https://github.com/Hyperscalar/en)
+  - -> Deployed on / 部署于 [hyperscalar/en](https://github.com/hyperscalar/en)
   - -> Servicing / 服务于 [English blog](https://hyperscalar.github.io/en/)
 - /zh/
-  - -> Deployed on / 部署于 [Hyperscalar/zh](https://github.com/Hyperscalar/zh)
+  - -> Deployed on / 部署于 [hyperscalar/zh](https://github.com/hyperscalar/zh)
   - -> Servicing / 服务于 [中文博客](https://hyperscalar.github.io/zh/)
 
 Cloudflare Pages
 
 - /
-  - -> Deployed on / 部署于 [Hyperscalar/hyperscalar.pages.dev](https://github.com/Hyperscalar/hyperscalar.pages.dev)
+  - -> Deployed on / 部署于 [hyperscalar/hyperscalar.pages.dev](https://github.com/hyperscalar/hyperscalar.pages.dev)
   - -> Servicing / 服务于 [Home / 首页](https://hyperscalar.pages.dev/)、[English blog](https://hyperscalar.pages.dev/en/)、[中文博客](https://hyperscalar.pages.dev/zh/)
