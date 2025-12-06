@@ -1,6 +1,7 @@
 ---
 title: 贫血模型还是充血模型？我全都要！
-date: 2025-12-18
+date:
+updated:
 categories:
 - 领域模型
 tags:
@@ -11,3 +12,4 @@ mathjax: true
 
 ---
 
+# 贫血模型还是充血模型？我全都要！
