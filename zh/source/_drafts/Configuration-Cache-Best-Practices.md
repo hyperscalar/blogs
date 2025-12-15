@@ -1,5 +1,5 @@
 ---
-title: 配置类数据缓存最佳实践
+title: 配置数据缓存最佳实践
 date:
 updated:
 categories:
@@ -12,4 +12,4 @@ mathjax: true
 
 ---
 
-# 配置类数据缓存最佳实践
+# 配置数据缓存最佳实践

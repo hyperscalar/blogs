@@ -1,5 +1,5 @@
 ---
-title: ForkJoinPool in Practice
+title: Fork/Join Framework in Practice
 date:
 updated:
 categories:
@@ -12,4 +12,4 @@ mathjax: true
 
 ---
 
-# ForkJoinPool in Practice
+# Fork/Join Framework in Practice
